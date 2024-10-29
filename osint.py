@@ -113,10 +113,4 @@ def main():
     facebook_profiles = search_facebook(name)
     
     # Format and print output
-    formatted_output = format_output(name, google_results, twitter_results, whois_info, people_search_results, facebook_profiles)
-    print("\nSearch Results:")
-    print(formatted_output)
-
-# Run the code
-if __name__ == "__main__":
-    main()
+    formatted_output = format_output(name, google
