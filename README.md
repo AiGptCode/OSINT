@@ -1,7 +1,7 @@
 
 ⭐ Project Review: OSINT Data Collection Tool ⭐
 
-Overview
+
 
 This project provides a foundational tool for OSINT (Open-Source Intelligence) data collection, using Python to aggregate information from social media platforms, search engines, and WHOIS data. The code is modular and easy to follow, making it an excellent choice for developers interested in exploring ethical data gathering and OSINT techniques.
 
