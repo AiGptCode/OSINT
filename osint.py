@@ -4,12 +4,17 @@ import tweepy
 import whois
 import json
 import time
+from dotenv import load_dotenv
+import os
+
+# بارگذاری متغیرهای محیطی
+load_dotenv()
 
 # Twitter API credentials (replace with your actual keys)
-TWITTER_API_KEY = 'your_api_key'
-TWITTER_API_SECRET = 'your_api_secret'
-TWITTER_ACCESS_TOKEN = 'your_access_token'
-TWITTER_ACCESS_TOKEN_SECRET = 'your_access_token_secret'
+TWITTER_API_KEY = os.getenv('TWITTER_API_KEY')
+TWITTER_API_SECRET = os.getenv('TWITTER_API_SECRET')
+TWITTER_ACCESS_TOKEN = os.getenv('TWITTER_ACCESS_TOKEN')
+TWITTER_ACCESS_TOKEN_SECRET = os.getenv('TWITTER_ACCESS_TOKEN_SECRET')
 
 def twitter_auth():
     """Authenticate with Twitter API."""
@@ -96,6 +101,7 @@ def format_output(name, google_results, twitter_results, whois_info, people_sear
 
 def main():
     name = input("Enter the name to search: ")
+    domain = input("Enter a domain to look up (or leave blank to skip): ") or None
     
     # Authenticate Twitter
     twitter_api = twitter_auth()
@@ -106,11 +112,16 @@ def main():
     google_results = search_google(name)
     twitter_results = search_twitter(twitter_api, name)
     
-    domain = "example.com"  # Example domain, replace with a domain to search
-    whois_info = get_whois_info(domain)
+    whois_info = get_whois_info(domain) if domain else None
 
     people_search_results = search_people_engines(name)
     facebook_profiles = search_facebook(name)
     
     # Format and print output
-    formatted_output = format_output(name, google
+    formatted_output = format_output(name, google_results, twitter_results, whois_info, people_search_results, facebook_profiles)
+    print("\nSearch Results:")
+    print(formatted_output)
+
+# Run the code
+if __name__ == "__main__":
+    main()
